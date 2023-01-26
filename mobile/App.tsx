@@ -12,7 +12,7 @@ import { Loading } from '@components/Loading';
 import { Routes } from '@routes/index';
 
 
-OneSignal.setAppId('feb8edab-cb24-4bef-9675-85ec80a245ab');
+OneSignal.setAppId(`${process.env.ONESIGNAL_APP_ID}`);
 OneSignal.promptForPushNotificationsWithUserResponse();
 
 export default function App() {
