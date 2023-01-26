@@ -1,6 +1,3 @@
-/* eslint-disable no-empty-pattern */
-/* eslint-disable no-async-promise-executor */
-/* eslint-disable prefer-const */
 import axios, { AxiosInstance } from 'axios';
 import { AppError } from '@utils/AppError';
 import { storageAuthTokenGet, storageAuthTokenSave } from '../storage/storageAuthToken';
