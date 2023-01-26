@@ -1,6 +1,8 @@
+import OneSignal from 'react-native-onesignal';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from 'native-base';
+
 
 import { Controller, useForm } from 'react-hook-form';
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes';
@@ -37,6 +39,7 @@ export function SignIn() {
       setIsLoading(true);
       await signIn(email, password);
 
+      OneSignal.setEmail(`${email}`);
     } catch (error) {
       const isAppError = error instanceof AppError;
 

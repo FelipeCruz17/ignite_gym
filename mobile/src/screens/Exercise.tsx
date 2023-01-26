@@ -14,7 +14,6 @@ import { Loading } from '@components/Loading';
 
 import BodySvg from '@assets/body.svg';
 import SeriesSvg from '@assets/series.svg';
-import RepetitionsSvg from '@assets/repetitions.svg';
 
 type RouteParamsProps = {
   exerciseId: string
@@ -54,7 +53,7 @@ export function Exercise() {
     }
   }
 
-  async function handleExerciseHistoryRegister(){
+  async function handleExerciseHistoryRegister() {
     try {
       setSubmittingRegister(true);
       await api.post('/history/', {

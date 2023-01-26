@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { VStack, FlatList, HStack, Heading, Text, useToast } from 'native-base';
+import { VStack, FlatList, HStack, Heading, Text, useToast, Center } from 'native-base';
 import { api } from '../services/api';
 import { AppNavigatorRoutesProps } from '@routes/app.routes';
 import { ExerciseDTO } from '@dtos/ExerciseDTO';
@@ -20,11 +20,11 @@ export function Home() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
   const toast = useToast();
 
-  function handleOpenExercisesPage(exerciseId: string){
-    navigation.navigate('exercise', {exerciseId});
+  function handleOpenExercisesPage(exerciseId: string) {
+    navigation.navigate('exercise', { exerciseId });
   }
 
-  async function fetchGroups(){
+  async function fetchGroups() {
     try {
       const response = await api.get('/groups');
       setGroups(response.data);
@@ -41,7 +41,7 @@ export function Home() {
     }
   }
 
-  async function fetchExercisesByGroup(){
+  async function fetchExercisesByGroup() {
     try {
       setIsLoading(true);
       const response = await api.get(`/exercises/bygroup/${groupSelected}`);
@@ -101,7 +101,7 @@ export function Home() {
           <VStack flex={1} px={8}>
             <HStack justifyContent='space-between' mb={5}>
               <Heading color='gray.200' fontSize='md' fontFamily='heading'>
-          Exercícios
+                Exercícios
               </Heading>
 
               <Text color='gray.200' fontSize='sm'>
@@ -109,20 +109,31 @@ export function Home() {
               </Text>
             </HStack>
 
-            <FlatList
-              data={exercises}
-              showsVerticalScrollIndicator={false}
-              _contentContainerStyle={{
-                paddingBottom: 20,
-              }}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) => (
-                <ExerciseCard
-                  data={item}
-                  onPress={() => handleOpenExercisesPage(item.id)}
-                />
-              )}
-            />
+            {
+              exercises.length === 0 ? (
+                <Center mt={10} >
+                  <Text color='gray.200' fontSize='md' fontFamily='body'>
+                    Escolha um grupo muscular
+                  </Text>
+                </Center>
+              ) : (
+                <FlatList
+                  data={exercises}
+                  showsVerticalScrollIndicator={false}
+                  _contentContainerStyle={{
+                    paddingBottom: 20,
+                  }}
+                  keyExtractor={item => item.id}
+                  renderItem={({ item }) => (
+                    <ExerciseCard
+                      data={item}
+                      onPress={() => handleOpenExercisesPage(item.id)}
+                    />
+                  )}
+                />)
+            }
+
+
           </VStack>
       }
     </VStack>

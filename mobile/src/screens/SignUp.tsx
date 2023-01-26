@@ -5,6 +5,7 @@ import { VStack, Image, Text, Center, Heading, ScrollView, useToast } from 'nati
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { tagUserEmailCreate } from '../notifications/notifications-tags';
 
 import { AppError } from '@utils/AppError';
 import { api } from '../services/api';
@@ -66,6 +67,9 @@ export function SignUp() {
       });
 
       await signIn(email, password);
+
+
+      tagUserEmailCreate(name, email);
 
     } catch (error) {
       setIsLoading(false);
