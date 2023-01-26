@@ -10,7 +10,7 @@ import { AuthContextProvider } from './src/contexts/AuthContext';
 import { Loading } from '@components/Loading';
 import { Routes } from '@routes/index';
 
-OneSignal.setAppId(`${process.env.ONESIGNAL_APP_ID}`);
+OneSignal.setAppId('feb8edab-cb24-4bef-9675-85ec80a245ab');
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
